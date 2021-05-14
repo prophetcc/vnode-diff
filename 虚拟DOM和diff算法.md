@@ -162,4 +162,22 @@ const vnode2 = h("ol", {}, [
 
 ### 什么是同一节点
 
+- diff 算法只有是同一个节点，才会进行精细化比较
 - 只有选择器相同并且 key 相同，才会被认为是同一节点
+
+### patch 算法的流程
+
+<img src="./images/04.png"></img>
+
+#### 如何比较两个节点是否为同一个节点
+
+```js
+function sameVnode(vnode1: VNode, vnode2: VNode): boolean {
+  return vnode1.key === vnode2.key && vnode1.sel === vnode2.sel;
+}
+```
+
+- 旧节点的 key 和新节点的 key 要相同
+- 旧节点的选择器和新节点的选择器要相同
+
+#### 创建子节点是需要递归的
